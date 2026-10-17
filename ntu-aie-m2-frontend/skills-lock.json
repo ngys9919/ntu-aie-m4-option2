@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "readme": {
+      "source": "ngys9919/skills",
+      "sourceType": "github",
+      "skillPath": "readme/SKILL.md",
+      "computedHash": "c66c5770a9a666ab1c6e0a572525256f36ed1fbe51839809ea3e315cee125ef2"
+    }
+  }
+}
