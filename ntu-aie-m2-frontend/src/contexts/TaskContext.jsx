@@ -21,7 +21,6 @@ import { API_BASE } from "../App";
 //       : [];
 
 export function TaskProvider({ children }) {
-  
   const [state, dispatch] = useReducer(taskReducer, initialState);
   const { tasks, loading, error, submitting, filter } = state;
   const [searchTerm, setSearchTerm] = useState("");
@@ -37,10 +36,11 @@ export function TaskProvider({ children }) {
   //   statusFilter === 'all' ? tasks : tasks.filter((t) => t.status === statusFilter);
 
   const filteredTasks =
-    filter === 'all' ? tasks : tasks.filter((task) => task.completed === filter);
-  
-  useEffect(() => {
+    filter === "all"
+      ? tasks
+      : tasks.filter((task) => task.completed === filter);
 
+  useEffect(() => {
     console.log("Fetching tasks from mock data");
 
     const loadTasks = async () => {
@@ -151,14 +151,33 @@ export function TaskProvider({ children }) {
   //   }
   // };
 
-  const updateTask = async (taskId, updates) => {
+  // const updateTask = async (taskId, updates) => {
+  //   try {
+  //     const response = await fetch(`${API_BASE}/tasks/${taskId}`, {
+  //       method: "PATCH",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(updates),
+  //     });
+  //     if (!response.ok) throw new Error(`Server error: ${response.status}`);
+  //     const updated = await response.json();
+  //     dispatch({ type: "UPDATE_TASK", payload: updated });
+  //   } catch (err) {
+  //     alert(`Failed to update task: ${err.message}`);
+  //   }
+  // };
+
+  const updateTask = async (taskId, updatedTask) => {
     try {
       const response = await fetch(`${API_BASE}/tasks/${taskId}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updates),
+        body: JSON.stringify(updatedTask),
       });
-      if (!response.ok) throw new Error(`Server error: ${response.status}`);
+
+      if (!response.ok) {
+        throw new Error(`Server error: ${response.status}`);
+      }
+
       const updated = await response.json();
       dispatch({ type: "UPDATE_TASK", payload: updated });
     } catch (err) {
@@ -181,8 +200,7 @@ export function TaskProvider({ children }) {
   // };
 
   const deleteTask = async (taskId) => {
-    if (!window.confirm("Are you sure you want to delete this task?"))
-      return;
+    if (!window.confirm("Are you sure you want to delete this task?")) return;
     try {
       const response = await fetch(`${API_BASE}/tasks/${taskId}`, {
         method: "DELETE",
@@ -195,9 +213,9 @@ export function TaskProvider({ children }) {
   };
 
   function setFilter(nextFilter) {
-    dispatch({ type: 'SET_FILTER', payload: nextFilter });
+    dispatch({ type: "SET_FILTER", payload: nextFilter });
   }
-  
+
   return (
     <TaskContext.Provider
       value={{
