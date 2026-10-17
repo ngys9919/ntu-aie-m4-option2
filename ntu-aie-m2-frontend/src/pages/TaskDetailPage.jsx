@@ -31,8 +31,8 @@ function TaskDetailPage() {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDelete = async () => {
-    const deleteID = id;
-    // const deleteID = Number(id);
+    // const deleteID = id;
+    const deleteID = Number(id);
     await deleteTask(deleteID);
     navigate("/tasks");
   };
@@ -42,8 +42,8 @@ function TaskDetailPage() {
       setLoading(true);
       setError(null);
       try {
-        // const data = tasks.find((candidate) => candidate.id === Number(id));
-        const data = tasks.find((candidate) => candidate.id === id);
+        const data = tasks.find((candidate) => candidate.id === Number(id));
+        // const data = tasks.find((candidate) => candidate.id === id);
         if (!data) {
           throw new Error(`Task not found`);
         }
