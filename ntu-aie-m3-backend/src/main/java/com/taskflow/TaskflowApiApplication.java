@@ -18,7 +18,9 @@ public class TaskflowApiApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("https://task-manager-production.netlify.app");
+				registry.addMapping("/**")
+						.allowedOrigins("https://task-manager-production.netlify.app")
+						.allowedMethods("GET", "HEAD", "POST", "PUT", "DELETE");
 			}
 		};
 	}

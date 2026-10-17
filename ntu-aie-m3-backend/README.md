@@ -41,11 +41,28 @@ If you didn't complete every task, list what you completed, what went wrong, and
 
 Which stretch goal you chose (if any), what you built, and any links (for example, your frontend URL, CI pipeline run or Docker Hub tags).
 
-```
-Stretch goal: <option number and name, or "None">
-Links: <https://...>
-Notes: <what you built and anything that didn't work>
-```
+
+Stretch goal: <OPTION 2: ADD A FRONTEND ON NETLIFY>
+
+Link for Frontend URL: **https://task-manager-production.netlify.app/**
+
+**Notes:**
+
+1. Modify the taskflow-api-main template code to include the following additional API Routes in TaskController.java:
+
+The API is available under the base path `/api/tasks`.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| PUT | `/api/tasks/{id}` | Update a task |
+| DELETE | `/api/tasks/{id}` | Delete a task |
+
+2. Add the implementation functionality for updateTask and deleteTask in TaskService.java, still using the JpaRepository interface and H2 in-memory database.
+
+3. Using the CORS configuration in TaskflowApiApplication.java to configure allowedOrigins(...), and also allowedMethods(...). Spring MVC’s default CORS methods are GET, HEAD, and POST, so cross-origin PUT and DELETE requests are added.
+
+
+![Frontend using Netlify](screenshots/frontend.png)
 
 ## Getting started
 
